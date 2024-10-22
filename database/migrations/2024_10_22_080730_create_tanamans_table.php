@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tanamans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->integer('harga');
+            $table->string('foto');
             $table->timestamps();
         });
     }
