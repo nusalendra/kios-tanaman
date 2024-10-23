@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kriterias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tanaman_id')->constrained('tanamans');
+            $table->foreignId('tanaman_id')->constrained('tanamans')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('nama');
             $table->string('tipe');
             $table->double('bobot');

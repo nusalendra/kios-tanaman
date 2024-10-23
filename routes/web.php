@@ -60,6 +60,10 @@ Route::delete('/tanaman/{id}', [TanamanController::class, 'destroy'])->name('tan
 
 Route::get('/kriteria', [KriteriaController::class, 'index'])->name('kriteria.index');
 Route::get('/kriteria/create', [KriteriaController::class, 'create'])->name('kriteria.create');
+Route::post('/kriteria', [KriteriaController::class, 'store'])->name('kriteria.store');
+Route::get('/kriteria/{id}/edit', [KriteriaController::class, 'edit'])->name('kriteria.edit');
+Route::put('/kriteria/{id}', [KriteriaController::class, 'update'])->name('kriteria.update');
+Route::delete('/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('kriteria.destroy');
 
 Route::get('/subkriteria', [SubkriteriaController::class, 'index'])->name('subkriteria.index');
 Route::get('/subkriteria/create', [SubkriteriaController::class, 'create'])->name('subkriteria.create');

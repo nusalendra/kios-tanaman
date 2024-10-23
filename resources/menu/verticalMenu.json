@@ -65,7 +65,7 @@
     },
     {
       "name": "Kriteria",
-      "icon": "menu-icon tf-icons bx bx-leaf",
+      "icon": "menu-icon tf-icons bx bx-list-ul",
       "slug": "kriteria.index",
       "url": "kriteria"
     },

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kriteria extends Model
 {
     use HasFactory;
-    protected $table = 'tanamans';
+    protected $table = 'kriterias';
     protected $primarykey = 'id';
     protected $fillable = ['tanaman_id', 'nama', 'tipe', 'bobot'];
     protected $guraded = [];
