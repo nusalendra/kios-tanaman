@@ -11,7 +11,7 @@
       ],
       "submenu": [
         {
-          "url": "/",
+          "url": "/dashboard",
           "name": "Analytics",
           "slug": "dashboard-analytics"
         },
@@ -56,6 +56,24 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Daftar Tanaman",
+      "icon": "menu-icon tf-icons bx bx-leaf",
+      "slug": "tanaman.index",
+      "url": "tanaman"
+    },
+    {
+      "name": "Kriteria",
+      "icon": "menu-icon tf-icons bx bx-leaf",
+      "slug": "kriteria.index",
+      "url": "kriteria"
+    },
+    {
+      "name": "Subkriteria",
+      "icon": "menu-icon tf-icons bx bx-leaf",
+      "slug": "subkriteria.index",
+      "url": "subkriteria"
     },
     {
       "name": "Layouts",
