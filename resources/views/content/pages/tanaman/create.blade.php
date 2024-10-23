@@ -5,7 +5,7 @@
 
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Fluid - Layouts')
+@section('title', 'Tambah Tanaman')
 
 @section('content')
     <div class="row">

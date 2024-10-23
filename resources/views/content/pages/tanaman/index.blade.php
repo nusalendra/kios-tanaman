@@ -16,35 +16,57 @@
     <div class="text-end mb-3">
         <a href="/tanaman/create" class="btn btn-dark">Tambah Tanaman</a>
     </div>
-    <div class="card">
-        <h5 class="card-header">Daftar Tanaman</h5>
-        <div class="card-body">
-            <div class="table-responsive text-nowrap">
-                <table class="table table-bordered">
+    <div class="card p-3">
+        <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive text-nowrap p-0">
+                <table id="myTable" class="table align-items-center mb-0">
                     <thead>
-                        <tr class="text-center">
-                            <th>No</th>
-                            <th>Tanaman</th>
-                            <th>Harga</th>
-                            <th>Gambar Tanaman</th>
-                            <th>Aksi</th>
+                        <tr>
+                            <th class="text-uppercase text-xs font-weight-bolder text-start">No</th>
+                            <th class="text-uppercase text-xs font-weight-bolder text-start">Tanaman</th>
+                            <th class="text-uppercase text-xs font-weight-bolder text-start">Harga</th>
+                            <th class="text-uppercase text-xs font-weight-bolder text-start">Gambar Tanaman</th>
+                            <th class="text-uppercase text-xs font-weight-bolder text-start">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $index => $item)
-                            <tr class="text-center">
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
+                            <tr>
                                 <td>
-                                    <a href="/storage/gambar-tanaman/{{ $item->gambar }}" target="_blank">
-                                        <img width="200" height="100"
-                                            src="{{ asset('storage/gambar-tanaman/' . $item->gambar) }}"
-                                            alt="{{ $item->nama }}" src="/storage/gambar-tanaman/{{ $item->gambar }}">
-                                    </a>
+                                    <div class="d-flex px-2 py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{ $index + 1 }}</h6>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
-                                    <div class="d-flex justify-content-center">
+                                    <div class="d-flex px-2 py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{ $item->nama }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">Rp. {{ number_format($item->harga, 0, ',', '.') }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <a href="/storage/gambar-tanaman/{{ $item->gambar }}" target="_blank">
+                                                <img width="200" height="100"
+                                                    src="{{ asset('storage/gambar-tanaman/' . $item->gambar) }}"
+                                                    alt="{{ $item->nama }}"
+                                                    src="/storage/gambar-tanaman/{{ $item->gambar }}">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <a href="/tanaman/{{ $item->id }}/edit">
                                                 <button type="button" class="btn btn-warning">
@@ -82,6 +104,12 @@
                         @endforeach
                     </tbody>
                 </table>
+                <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+                <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+                <script>
+                    let table = new DataTable('#myTable');
+                </script>
             </div>
         </div>
     </div>
