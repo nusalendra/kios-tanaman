@@ -53,6 +53,10 @@ Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard-analytics
 
 Route::get('/tanaman', [TanamanController::class, 'index'])->name('tanaman.index');
 Route::get('/tanaman/create', [TanamanController::class, 'create'])->name('tanaman.create');
+Route::post('/tanaman', [TanamanController::class, 'store'])->name('tanaman.store');
+Route::get('/tanaman/{id}/edit', [TanamanController::class, 'edit'])->name('tanaman.edit');
+Route::put('/tanaman/{id}', [TanamanController::class, 'update'])->name('tanaman.update');
+Route::delete('/tanaman/{id}', [TanamanController::class, 'destroy'])->name('tanaman.destroy');
 
 Route::get('/kriteria', [KriteriaController::class, 'index'])->name('kriteria.index');
 Route::get('/kriteria/create', [KriteriaController::class, 'create'])->name('kriteria.create');
