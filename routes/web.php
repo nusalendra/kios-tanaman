@@ -42,10 +42,23 @@ use App\Http\Controllers\form_elements\BasicInput;
 use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\SubkriteriaController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
+use App\Http\Controllers\TanamanController;
 
 // Main Page Route
-Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+Route::view('/', 'content.pages.guest.index');
+Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard-analytics');
+
+Route::get('/tanaman', [TanamanController::class, 'index'])->name('tanaman.index');
+Route::get('/tanaman/create', [TanamanController::class, 'create'])->name('tanaman.create');
+
+Route::get('/kriteria', [KriteriaController::class, 'index'])->name('kriteria.index');
+Route::get('/kriteria/create', [KriteriaController::class, 'create'])->name('kriteria.create');
+
+Route::get('/subkriteria', [SubkriteriaController::class, 'index'])->name('subkriteria.index');
+Route::get('/subkriteria/create', [SubkriteriaController::class, 'create'])->name('subkriteria.create');
 
 // layout
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');

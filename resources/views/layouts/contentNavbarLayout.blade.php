@@ -49,12 +49,6 @@
 
                 </div>
                 <!-- / Content -->
-
-                <!-- Footer -->
-                @if ($isFooter)
-                    @include('layouts/sections/footer/footer')
-                @endif
-                <!-- / Footer -->
                 <div class="content-backdrop fade"></div>
             </div>
             <!--/ Content wrapper -->
