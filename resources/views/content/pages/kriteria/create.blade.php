@@ -15,17 +15,6 @@
                         @csrf
                         <div id="formKriteriaContainer">
                             <div class="form-kriteria mb-3">
-                                <div class="row mb-5">
-                                    <label class="col-sm-2 col-form-label">Tanaman</label>
-                                    <div class="col-sm-10">
-                                        <select name="tanaman_id" class="form-select" required>
-                                            <option value="" selected disabled>Pilih Tanaman</option>
-                                            @foreach ($tanaman as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Nama Kriteria</label>
                                     <div class="col-sm-10">

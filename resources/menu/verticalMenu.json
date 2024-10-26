@@ -58,12 +58,6 @@
       ]
     },
     {
-      "name": "Daftar Tanaman",
-      "icon": "menu-icon tf-icons bx bx-leaf",
-      "slug": "tanaman.index",
-      "url": "tanaman"
-    },
-    {
       "name": "Kriteria",
       "icon": "menu-icon tf-icons bx bx-list-ul",
       "slug": "kriteria.index",
@@ -74,6 +68,12 @@
       "icon": "menu-icon tf-icons bx bx-leaf",
       "slug": "subkriteria.index",
       "url": "subkriteria"
+    },
+    {
+      "name": "Daftar Tanaman",
+      "icon": "menu-icon tf-icons bx bx-leaf",
+      "slug": "tanaman.index",
+      "url": "tanaman"
     },
     {
       "name": "Layouts",
