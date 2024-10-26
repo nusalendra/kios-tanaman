@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kriterias', function (Blueprint $table) {
+        Schema::create('tanaman_subkriterias', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('tipe');
-            $table->double('bobot');
+            $table->foreignId('tanaman_id')->constrained('tanamans')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('subkriteria_id')->constrained('subkriterias')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kriterias');
+        Schema::dropIfExists('tanaman_subkriterias');
     }
 };

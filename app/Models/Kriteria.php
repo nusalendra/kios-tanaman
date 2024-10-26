@@ -10,13 +10,8 @@ class Kriteria extends Model
     use HasFactory;
     protected $table = 'kriterias';
     protected $primarykey = 'id';
-    protected $fillable = ['tanaman_id', 'nama', 'tipe', 'bobot'];
+    protected $fillable = ['nama', 'tipe', 'bobot'];
     protected $guraded = [];
-
-    public function tanaman()
-    {
-        return $this->belongsTo(Tanaman::class, 'tanaman_id');
-    }
 
     public function subkriteria()
     {

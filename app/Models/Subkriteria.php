@@ -17,4 +17,9 @@ class Subkriteria extends Model
     {
         return $this->belongsTo(Kriteria::class, 'kriteria_id');
     }
+
+    public function tanaman()
+    {
+        return $this->belongsToMany(Tanaman::class, 'tanaman_subkriterias', 'subkriteria_id', 'tanaman_id');
+    }
 }
