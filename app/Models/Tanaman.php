@@ -10,11 +10,11 @@ class Tanaman extends Model
     use HasFactory;
     protected $table = 'tanamans';
     protected $primarykey = 'id';
-    protected $fillable = ['nama', 'harga', 'gambar'];
+    protected $fillable = ['nama', 'gambar'];
     protected $guraded = [];
 
-    public function kriteria()
+    public function subkriteria()
     {
-        return $this->hasMany(Kriteria::class, 'tanaman_id');
+        return $this->belongsToMany(Subkriteria::class, 'tanaman_subkriterias', 'tanaman_id', 'subkriteria_id');
     }
 }
