@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tanaman_id')->constrained('tanamans')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('subkriteria_id')->constrained('subkriterias')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->timestamps();
         });
     }
 
