@@ -16,14 +16,6 @@
                         <div id="formKriteriaContainer">
                             <div class="form-kriteria mb-3">
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Tanaman</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="nama"
-                                            placeholder="Masukkan Nama Kriteria" value="{{ $kriteria->tanaman->nama }}"
-                                            readonly />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Nama Kriteria</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="nama"

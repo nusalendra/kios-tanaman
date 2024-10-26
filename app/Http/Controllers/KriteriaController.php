@@ -24,7 +24,6 @@ class KriteriaController extends Controller
     {
         foreach ($request->input('nama') as $index => $nama) {
             $kriteria = new Kriteria();
-            $kriteria->tanaman_id = $request->input('tanaman_id');
             $kriteria->nama = $nama;
             $kriteria->tipe = $request->input('tipe')[$index];
             $kriteria->bobot = $request->input('bobot')[$index];

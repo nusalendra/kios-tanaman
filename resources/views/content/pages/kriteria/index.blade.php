@@ -23,7 +23,6 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-xs font-weight-bolder text-start">No</th>
-                            <th class="text-uppercase text-xs font-weight-bolder text-start">Tanaman</th>
                             <th class="text-uppercase text-xs font-weight-bolder text-start">Nama Kriteria</th>
                             <th class="text-uppercase text-xs font-weight-bolder text-start">Tipe Kriteria</th>
                             <th class="text-uppercase text-xs font-weight-bolder text-start">Bobot Kriteria</th>
@@ -37,13 +36,6 @@
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">{{ $index + 1 }}</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{ $item->tanaman->nama }}</h6>
                                         </div>
                                     </div>
                                 </td>
