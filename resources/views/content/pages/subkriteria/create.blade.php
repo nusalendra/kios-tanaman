@@ -3,6 +3,11 @@
 @section('title', 'Tambah Subkriteria')
 
 @section('content')
+    <style>
+        .swal2-container {
+            z-index: 10000 !important;
+        }
+    </style>
     <div class="row">
         <div class="col-xxl">
             <div class="card mb-4">
@@ -11,26 +16,18 @@
                     <button id="tambahSubkriteriaBaru" class="btn btn-dark">Tambah Subkriteria Baru</button>
                 </div>
                 <div class="card-body">
-                    <form id="kriteriaForm" action="/subkriteria" method="POST" enctype="multipart/form-data">
+                    <form action="/subkriteria" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div id="formKriteriaContainer">
                             <div class="form-kriteria mb-3">
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Tanaman</label>
-                                    <div class="col-sm-10">
-                                        <select id="tanamanSelect" name="tanaman_id" class="form-select" required>
-                                            <option value="" selected disabled>Pilih Tanaman</option>
-                                            @foreach ($tanaman as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="row mb-5">
                                     <label class="col-sm-2 col-form-label">Kriteria</label>
                                     <div class="col-sm-10">
-                                        <select id="kriteriaSelect" name="kriteria_id" class="form-select" required>
+                                        <select name="kriteria_id" class="form-select" required>
                                             <option value="" selected disabled>Pilih Kriteria</option>
+                                            @foreach ($kriteria as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -60,34 +57,6 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#tanamanSelect').change(function() {
-                var tanamanId = $(this).val();
-                if (tanamanId) {
-                    $.ajax({
-                        url: '/get-kriteria-by-tanaman/' + tanamanId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#kriteriaSelect').empty().append(
-                                '<option value="" selected disabled>Pilih Kriteria</option>'
-                            );
-                            $.each(data, function(key, value) {
-                                $('#kriteriaSelect').append('<option value="' + value
-                                    .id + '">' + value.nama + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#kriteriaSelect').empty().append(
-                        '<option value="" selected disabled>Pilih Kriteria</option>');
-                }
-            });
-        });
-    </script>
-
     <script>
         document.getElementById('tambahSubkriteriaBaru').addEventListener('click', function() {
             const container = document.getElementById('formKriteriaContainer');
@@ -112,5 +81,13 @@
             container.appendChild(newForm);
         });
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+            });
+        </script>
+    @endif
 @endsection

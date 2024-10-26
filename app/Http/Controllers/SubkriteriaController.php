@@ -17,8 +17,8 @@ class SubkriteriaController extends Controller
 
     public function create()
     {
-        $tanaman = Tanaman::all();
-        return view('content.pages.subkriteria.create', compact('tanaman'));
+        $kriteria = Kriteria::all();
+        return view('content.pages.subkriteria.create', compact('kriteria'));
     }
 
     public function store(Request $request)
@@ -32,7 +32,7 @@ class SubkriteriaController extends Controller
             $subkriteria->save();
         }
 
-        return redirect('subkriteria/create');
+        return redirect()->back()->with('success', 'Data Berhasil Disimpan');
     }
 
     public function edit($id)
@@ -59,12 +59,5 @@ class SubkriteriaController extends Controller
         $subkriteria->delete();
 
         return redirect('/subkriteria');
-    }
-
-    public function getKriteriaByTanaman($tanamanId)
-    {
-        $kriteria = Kriteria::where('tanaman_id', $tanamanId)->get();
-
-        return response()->json($kriteria);
     }
 }
