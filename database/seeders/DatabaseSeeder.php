@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Kriteria;
 use App\Models\Subkriteria;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +22,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        User::create([
+            'username' => 'budisetyo',
+            'password' => 'password',
+        ]);
 
         Kriteria::create([
             'nama' => 'Karakteristik Tanaman',

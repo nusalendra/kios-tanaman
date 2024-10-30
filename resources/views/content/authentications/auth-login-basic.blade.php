@@ -1,71 +1,119 @@
 @extends('layouts/blankLayout')
 
-@section('title', 'Login Basic - Pages')
+@section('title', 'Halaman Login')
 
 @section('page-style')
-<!-- Page -->
-<link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-auth.css')}}">
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}">
+    <style>
+        /* Custom Login Styles */
+        body {
+            background: linear-gradient(135deg, #6A82FB, #FC5C7D);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        .login-card {
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .login-header {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .login-subtext {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .form-control-custom {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-control-custom::placeholder {
+            color: #aaa;
+        }
+
+        .form-control-custom:focus {
+            border-color: #6A82FB;
+            box-shadow: none;
+        }
+
+        .btn-login {
+            background-color: #6A82FB;
+            color: #fff;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #5A6DE4;
+        }
+
+        .app-brand-logo img {
+            width: 50px;
+        }
+
+        .app-brand-text {
+            font-size: 1.5rem;
+            color: #6A82FB;
+            font-weight: bold;
+        }
+    </style>
 @endsection
 
 @section('content')
-<div class="container-xxl">
-  <div class="authentication-wrapper authentication-basic container-p-y">
-    <div class="authentication-inner">
-      <!-- Register -->
-      <div class="card">
-        <div class="card-body">
-          <!-- Logo -->
-          <div class="app-brand justify-content-center">
-            <a href="{{url('/')}}" class="app-brand-link gap-2">
-              <span class="app-brand-logo demo">@include('_partials.macros',["width"=>25,"withbg"=>'var(--bs-primary)'])</span>
-              <span class="app-brand-text demo text-body fw-bold">{{config('variables.templateName')}}</span>
-            </a>
-          </div>
-          <!-- /Logo -->
-          <h4 class="mb-2">Welcome to {{config('variables.templateName')}}! 👋</h4>
-          <p class="mb-4">Please sign-in to your account and start the adventure</p>
+    <div class="login-card">
+        <!-- Title -->
+        <h4 class="login-header mt-4">Selamat Datang!</h4>
+        <p class="login-subtext">Silahkan masukkan username dan password anda untuk melakukan login</p>
 
-          <form id="formAuthentication" class="mb-3" action="{{url('/')}}" method="GET">
+        <!-- Login Form -->
+        <form id="formAuthentication" action="/login" method="POST">
+            @csrf
             <div class="mb-3">
-              <label for="email" class="form-label">Email or Username</label>
-              <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus>
+                <input type="text" class="form-control form-control-custom" id="username" name="username"
+                    placeholder="Username" required autofocus>
             </div>
-            <div class="mb-3 form-password-toggle">
-              <div class="d-flex justify-content-between">
-                <label class="form-label" for="password">Password</label>
-                <a href="{{url('auth/forgot-password-basic')}}">
-                  <small>Forgot Password?</small>
-                </a>
-              </div>
-              <div class="input-group input-group-merge">
-                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
-                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-              </div>
+            <div class="mb-4">
+                <input type="password" class="form-control form-control-custom" id="password" name="password"
+                    placeholder="Password" required>
             </div>
-            <div class="mb-3">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="remember-me">
-                <label class="form-check-label" for="remember-me">
-                  Remember Me
-                </label>
-              </div>
-            </div>
-            <div class="mb-3">
-              <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
-            </div>
-          </form>
-
-          <p class="text-center">
-            <span>New on our platform?</span>
-            <a href="{{url('auth/register-basic')}}">
-              <span>Create an account</span>
-            </a>
-          </p>
-        </div>
-      </div>
+            <button type="submit" class="btn btn-login w-100">Log In</button>
+        </form>
+        <!-- /Login Form -->
     </div>
-    <!-- /Register -->
-  </div>
-</div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Aksi Dihentikan',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 @endsection
