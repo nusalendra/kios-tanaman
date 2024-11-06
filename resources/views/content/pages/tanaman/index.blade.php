@@ -13,7 +13,8 @@
             z-index: 10000 !important;
         }
     </style>
-    <div class="text-end mb-3">
+    <div class="mb-3 d-flex justify-content-between">
+        <button id="perhitunganSAWButton" type="button" class="btn btn-primary">Perhitungan SAW</button>
         <a href="/tanaman/create" class="btn btn-dark">Tambah Tanaman</a>
     </div>
     <div class="card p-3">
@@ -106,6 +107,31 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('perhitunganSAWButton').addEventListener('click', function() {
+            let timerInterval;
+            Swal.fire({
+                title: "Perhitungan SAW",
+                html: "Mohon Tunggu dalam <b></b> milidetik.",
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const timer = Swal.getPopup().querySelector("b");
+                    timerInterval = setInterval(() => {
+                        timer.textContent = `${Swal.getTimerLeft()}`;
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.href = "/tanaman/perhitungan-saw";
+                }
+            });
+        });
+    </script>
     <script>
         function hapusData(id) {
             Swal.fire({

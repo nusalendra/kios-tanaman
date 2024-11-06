@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tanaman/{id}/edit', [TanamanController::class, 'edit'])->name('tanaman.edit');
     Route::put('/tanaman/{id}', [TanamanController::class, 'update'])->name('tanaman.update');
     Route::delete('/tanaman/{id}', [TanamanController::class, 'destroy'])->name('tanaman.destroy');
+    Route::get('/tanaman/perhitungan-saw', [TanamanController::class, 'perhitunganSAW'])->name('tanaman.perhitungan-saw');
 
     Route::get('/kriteria', [KriteriaController::class, 'index'])->name('kriteria.index');
     Route::get('/kriteria/create', [KriteriaController::class, 'create'])->name('kriteria.create');
