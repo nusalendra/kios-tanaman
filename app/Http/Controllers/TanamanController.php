@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Kriteria;
 use App\Models\Tanaman;
-use App\Models\TanamanSubkriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -85,5 +84,78 @@ class TanamanController extends Controller
         $tanaman->delete();
 
         return redirect('/tanaman');
+    }
+
+    public function perhitunganSAW()
+    {
+        $tanamans = Tanaman::with(['subkriteria.kriteria'])->get();
+
+        $pengelompokanData = [];
+        foreach ($tanamans as $tanaman) {
+            foreach ($tanaman->subkriteria as $subkriteria) {
+                $pengelompokanData[$subkriteria->kriteria->id][] = [
+                    'tanaman' => $tanaman->nama,
+                    'subkriteria' => $subkriteria->nama,
+                    'skor' => $subkriteria->skor,
+                ];
+            }
+        }
+
+        $nilai_normalisasi = [];
+        $skor_akhir = [];
+        $total_skor_tanaman = [];
+
+        foreach ($pengelompokanData as $kriteriaId => $subkriterias) {
+            // Ambil tipe dan bobot kriteria
+            $kriteria = Kriteria::find($kriteriaId);
+            $tipe = $kriteria->tipe;
+            $bobot = $kriteria->bobot;
+
+            // Tentukan nilai maksimum atau minimum berdasarkan tipe kriteria
+            if ($tipe === 'Benefit') {
+                $maxValue = max(array_column($subkriterias, 'skor'));
+            } else {
+                $minValue = min(array_column($subkriterias, 'skor'));
+            }
+
+            foreach ($subkriterias as $data) {
+                // Hitung nilai normalisasi
+                if ($tipe === 'Benefit') {
+                    $normalisasi = $data['skor'] / $maxValue;
+                } else {
+                    $normalisasi = $minValue / $data['skor'];
+                }
+
+                // Simpan nilai normalisasi
+                $nilai_normalisasi[$kriteriaId][] = [
+                    'tanaman' => $data['tanaman'],
+                    'subkriteria' => $data['subkriteria'],
+                    'nilai_normalisasi' => $normalisasi,
+                ];
+
+                // Hitung skor akhir untuk tanaman berdasarkan kriteria
+                $skorAkhir = $normalisasi * $bobot;
+
+                // Simpan skor akhir berdasarkan tanaman dan kriteria
+                $skor_akhir[$data['tanaman']][$kriteriaId] = $skorAkhir;
+            }
+        }
+
+        // Hitung total skor tanaman dengan menjumlahkan skor setiap kriteria
+        foreach ($skor_akhir as $tanaman => $kriteriaScores) {
+            $total_skor_tanaman[$tanaman] = array_sum($kriteriaScores);
+        }
+
+        // Mengelompokkan tanaman dengan nama, skor akhir, dan total skor
+        $dataPerhitunganAkhir = [];
+        foreach ($skor_akhir as $tanaman => $kriteriaScores) {
+            $dataPerhitunganAkhir[] = [
+                'nama_tanaman' => $tanaman,
+                'skor_akhir' => $kriteriaScores,
+                'total_skor' => $total_skor_tanaman[$tanaman],
+            ];
+        }
+
+        return view('content.pages.tanaman.perhitungan-saw', compact('tanamans', 'nilai_normalisasi', 'dataPerhitunganAkhir'));
     }
 }
