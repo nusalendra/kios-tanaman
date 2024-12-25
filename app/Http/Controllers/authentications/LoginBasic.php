@@ -23,7 +23,7 @@ class LoginBasic extends Controller
     if (Auth::attempt($attributes)) {
       session()->regenerate();
 
-      return redirect('/dashboard');
+      return redirect('/kriteria');
     } else {
       return redirect()->back()->with('error', 'Username atau password anda salah!');
     }
