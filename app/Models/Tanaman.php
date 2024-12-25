@@ -10,7 +10,7 @@ class Tanaman extends Model
     use HasFactory;
     protected $table = 'tanamans';
     protected $primarykey = 'id';
-    protected $fillable = ['nama', 'gambar'];
+    protected $fillable = ['nama', 'gambar', 'deskripsi'];
     protected $guraded = [];
 
     public function subkriteria()
