@@ -33,6 +33,13 @@
                                     id="basic-default-company" />
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-deskripsi">Deskripsi</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="deskripsi" id="basic-default-deskripsi" placeholder="Masukkan Deskripsi Tanaman"
+                                    rows="4">{{ old('deskripsi', $tanaman->deskripsi) }}</textarea>
+                            </div>
+                        </div>
                         @foreach ($kriteria as $item)
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label"

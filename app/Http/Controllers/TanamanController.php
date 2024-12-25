@@ -27,6 +27,7 @@ class TanamanController extends Controller
     {
         $tanaman = new Tanaman();
         $tanaman->nama = $request->nama;
+        $tanaman->deskripsi = $request->deskripsi;
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
             $filename = $tanaman->nama . '.' . $file->getClientOriginalExtension();
@@ -56,6 +57,7 @@ class TanamanController extends Controller
     {
         $tanaman = Tanaman::find($id);
         $tanaman->nama = $request->nama ?? $tanaman->nama;
+        $tanaman->deskripsi = $request->deskripsi;
 
         if ($request->hasfile('gambar')) {
             if ($tanaman->gambar) {
