@@ -15,13 +15,11 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $item['nama_tanaman'] }}</h5>
                                         <p class="card-text">
-                                            This is a wider card with supporting text below as a natural lead-in to
-                                            additional content. This content
-                                            is a little bit longer.
+                                            {{ \Illuminate\Support\Str::limit($item['deskripsi'], 100, '...') }}
                                         </p>
                                         <a href="javascript:void(0)" class="btn btn-outline-primary show-modal"
                                             data-nama="{{ $item['nama_tanaman'] }}"
-                                            data-deskripsi="{{ $item['nama_tanaman'] }}"
+                                            data-deskripsi="{{ $item['deskripsi'] }}"
                                             data-gambar="{{ asset('storage/gambar-tanaman/' . ($item['gambar'] ?? 'Bunga Putih.jpg')) }}"
                                             data-kriteria='@json($item['kriteria'])'>
                                             Lihat Detail
@@ -63,13 +61,12 @@
                             <div style="margin-bottom: 15px; text-align: center;">
                                 <img src="${gambar}" alt="Gambar Tanaman" style="width: 100%; max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                             </div>
-                            <p><strong>Deskripsi:</strong> ${deskripsi}</p>
-                            <h4 style="margin-top: 20px; color: #4CAF50; font-weight: bold;">Kriteria</h4>
+                           <p class="text-justify fs-6">${deskripsi}</p>
                             <table style="width: 100%; border-collapse: collapse; margin-top: 10px; background-color: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                                 <thead>
                                     <tr style="background-color: #4CAF50; color: white;">
-                                        <th style="padding: 10px; text-align: left;">Kriteria</th>
-                                        <th style="padding: 10px; text-align: right;">Subkriteria</th>
+                                        <th style="padding: 10px; text-align: left;">Jenis Tanaman</th>
+                                        <th style="padding: 10px; text-align: right;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

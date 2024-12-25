@@ -94,6 +94,7 @@ class IndexController extends Controller
 
             return [
                 'nama_tanaman' => $tanaman,
+                'deskripsi' => $tanamanData->deskripsi,
                 'skor_akhir' => $kriteriaScores,
                 'total_skor' => $total_skor_tanaman[$tanaman],
                 'kriteria' => $kriteriaDanSubkriteria, // Tambahkan kriteria dan subkriteria
