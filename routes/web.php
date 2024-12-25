@@ -42,13 +42,16 @@ use App\Http\Controllers\form_elements\BasicInput;
 use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\SubkriteriaController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\TanamanController;
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::view('/', 'content.pages.guest.index');
+    Route::get('/', [IndexController::class, 'index'])->name('index');
+    Route::get('/fetch-all-data-tanaman', [IndexController::class, 'fetchAllDataTanaman'])->name('fetch-all-data-tanaman');
+    Route::get('/perhitungan-saw', [IndexController::class, 'perhitunganSAW'])->name('perhitungan-saw');
     Route::get('/login', [LoginBasic::class, 'index'])->name('auth-login-basic');
     Route::post('/login', [LoginBasic::class, 'store'])->name('auth-login-basic');
     // Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
