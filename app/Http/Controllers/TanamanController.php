@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GambarTanaman;
 use App\Models\Kriteria;
 use App\Models\Tanaman;
 use Illuminate\Http\Request;
@@ -28,14 +29,22 @@ class TanamanController extends Controller
         $tanaman = new Tanaman();
         $tanaman->nama = $request->nama;
         $tanaman->deskripsi = $request->deskripsi;
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $filename = $tanaman->nama . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/gambar-tanaman', $filename);
-            $tanaman->gambar = $filename;
-        }
 
         $tanaman->save();
+
+        if ($request->hasFile('gambar')) {
+            $files = $request->file('gambar');
+
+            foreach ($files as $file) {
+                $filename = $tanaman->nama . '_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('public/gambar-tanaman', $filename);
+
+                $gambarTanaman = new GambarTanaman();
+                $gambarTanaman->tanaman_id = $tanaman->id;
+                $gambarTanaman->nama = $filename;
+                $gambarTanaman->save();
+            }
+        }
 
         if ($request->has('subkriteria_id')) {
             $tanaman->subkriteria()->attach($request->subkriteria_id);
@@ -59,18 +68,29 @@ class TanamanController extends Controller
         $tanaman->nama = $request->nama ?? $tanaman->nama;
         $tanaman->deskripsi = $request->deskripsi;
 
+        $tanaman->save();
+
         if ($request->hasfile('gambar')) {
-            if ($tanaman->gambar) {
-                Storage::delete('public/gambar-tanaman/' . $tanaman->gambar);
+            $gambarTanaman = GambarTanaman::where('tanaman_id', $id)->get();
+
+            if ($gambarTanaman) {
+                foreach ($gambarTanaman as $gambar) {
+                    Storage::delete('public/gambar-tanaman/' . $gambar->nama);
+                    $gambar->delete();
+                }
             }
 
-            $file = $request->file('gambar');
-            $filename = $tanaman->nama . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/gambar-tanaman', $filename);
-            $tanaman->gambar = $filename;
-        }
+            $files = $request->file('gambar');
+            foreach ($files as $file) {
+                $filename = $tanaman->nama . '_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('public/gambar-tanaman', $filename);
 
-        $tanaman->save();
+                $gambarTanaman = new GambarTanaman();
+                $gambarTanaman->tanaman_id = $tanaman->id;
+                $gambarTanaman->nama = $filename;
+                $gambarTanaman->save();
+            }
+        }
 
         if ($request->has('subkriteria_id')) {
             $tanaman->subkriteria()->sync($request->subkriteria_id);
@@ -82,7 +102,14 @@ class TanamanController extends Controller
     public function destroy($id)
     {
         $tanaman = Tanaman::find($id);
-        Storage::delete('public/gambar-tanaman/' . $tanaman->gambar);
+        $gambarTanaman = GambarTanaman::where('tanaman_id', $id)->get();
+
+        if ($gambarTanaman) {
+            foreach ($gambarTanaman as $gambar) {
+                Storage::delete('public/gambar-tanaman/' . $gambar->nama);
+                $gambar->delete();
+            }
+        }
         $tanaman->delete();
 
         return redirect('/tanaman');

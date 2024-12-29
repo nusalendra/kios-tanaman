@@ -17,4 +17,9 @@ class Tanaman extends Model
     {
         return $this->belongsToMany(Subkriteria::class, 'tanaman_subkriterias', 'tanaman_id', 'subkriteria_id');
     }
+
+    public function gambarTanaman()
+    {
+        return $this->hasMany(GambarTanaman::class);
+    }
 }
