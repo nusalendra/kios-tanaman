@@ -25,7 +25,7 @@
 @endif
 
 <!-- ! Not required for layout-without-menu -->
-@if (!isset($navbarHideToggle))
+@if (!isset($navbarHideToggle) && Auth::user())
     <div
         class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0{{ isset($menuHorizontal) ? ' d-xl-none ' : '' }} {{ isset($contentNavbar) ? ' d-xl-none ' : '' }}">
         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
