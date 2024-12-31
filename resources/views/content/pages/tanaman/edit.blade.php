@@ -29,8 +29,8 @@
                             <label class="col-sm-2 col-form-label" for="basic-default-company">Upload Gambar Tanaman
                                 Baru</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" name="gambar[]" accept=".png,.jpg"
-                                    id="basic-default-company" multiple />
+                                <input type="file" class="form-control" name="gambar" accept=".png,.jpg"
+                                    id="basic-default-company" />
                             </div>
                         </div>
                         <div class="row mb-3">
