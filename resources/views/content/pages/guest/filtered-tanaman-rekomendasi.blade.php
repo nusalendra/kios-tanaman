@@ -3,7 +3,7 @@
         @foreach ($dataPerhitunganAkhir->chunk(4) as $row)
             <div class="row mb-5">
                 @foreach ($row as $item)
-                    <div class="col-md-3">
+                    <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-12">
