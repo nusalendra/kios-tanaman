@@ -81,10 +81,13 @@
     </div>
 @else
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <p class="text-uppercase fw-bold mb-0" style="font-size: 22px; letter-spacing: 1px; color: #b38b59;">
-            Kios Tanaman Ciliwung
-        </p>
+        <a href="/">
+            <p class="text-uppercase fw-bold mb-0" style="font-size: 22px; letter-spacing: 1px; color: #b38b59;">
+                Kios Tanaman Ciliwung
+            </p>
+        </a>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <a href="/contact-us" class="link-warning fw-semibold text-white me-2">Contact Us</a>
             <a href="/login" class="link-warning fw-semibold text-white">Login</a>
         </ul>
     </div>
