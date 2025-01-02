@@ -6,7 +6,7 @@
 
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Fluid - Layouts')
+@section('title', 'Kios Tanaman Ciliwung')
 
 @section('content')
     <style>
@@ -59,7 +59,23 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $item->nama }}</h5>
+                                            <h5 class="card-title fw-semibold">{{ $item->nama }}</h5>
+                                            <p class="card-text">
+                                                @php
+                                                    $hargaSubkriteria = $item->subkriteria->filter(function ($sub) {
+                                                        return $sub->kriteria->nama === 'Harga';
+                                                    });
+                                                @endphp
+
+                                                @if ($hargaSubkriteria->isNotEmpty())
+                                                    @foreach ($hargaSubkriteria as $harga)
+                                                        <strong
+                                                            class="text-primary">{{ $harga->nama }}{{ !$loop->last ? ',' : '' }}</strong>
+                                                    @endforeach
+                                                @else
+                                                    <strong>Rp. -</strong>
+                                                @endif
+                                            </p>
                                             <p class="card-text">
                                                 {{ \Illuminate\Support\Str::limit($item->deskripsi, 100, '...') }}
                                             </p>

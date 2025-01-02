@@ -16,6 +16,7 @@ use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\cards\CardBasic;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\user_interface\Accordion;
 use App\Http\Controllers\user_interface\Alerts;
 use App\Http\Controllers\user_interface\Badges;
@@ -54,6 +55,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/perhitungan-saw', [IndexController::class, 'perhitunganSAW'])->name('perhitungan-saw');
     Route::get('/login', [LoginBasic::class, 'index'])->name('auth-login-basic');
     Route::post('/login', [LoginBasic::class, 'store'])->name('auth-login-basic');
+    Route::get('/contact-us', function () {
+        return view('content.pages.guest.contact-us');
+    })->name('contact-us');
     // Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
     // Route::get('/auth/forgot-password-basic', [ForgotPasswordBasic::class, 'index'])->name('auth-reset-password-basic');
 });

@@ -11,7 +11,7 @@ class IndexController extends Controller
     public function index()
     {
         $tanaman = Tanaman::with(['subkriteria.kriteria'])->get();
-
+        // dd($tanaman);
         return view('content.pages.guest.index', compact('tanaman'));
     }
 
