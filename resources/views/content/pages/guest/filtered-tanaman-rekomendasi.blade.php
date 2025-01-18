@@ -15,6 +15,14 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $item['nama_tanaman'] }}</h5>
                                         <p class="card-text">
+                                            @foreach ($item['kriteria'] as $kriteria)
+                                                @if ($kriteria['nama_kriteria'] === 'Harga')
+                                                    <strong
+                                                        class="text-primary">{{ $kriteria['nama_subkriteria'] }}{{ !$loop->last ? ',' : '' }}</strong>
+                                                @endif
+                                            @endforeach
+                                        </p>
+                                        <p class="card-text">
                                             {{ \Illuminate\Support\Str::limit($item['deskripsi'], 100, '...') }}
                                         </p>
                                         <a href="javascript:void(0)" class="btn btn-outline-primary show-modal"
