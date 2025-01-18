@@ -79,17 +79,21 @@
                                             <p class="card-text">
                                                 {{ \Illuminate\Support\Str::limit($item->deskripsi, 100, '...') }}
                                             </p>
+                                            @php
+                                                $kriteriaJson = json_encode(
+                                                    $item->subkriteria->map(function ($sub) {
+                                                        return [
+                                                            'nama_kriteria' => $sub->kriteria->nama ?? 'No Name',
+                                                            'nama_subkriteria' => $sub->nama ?? 'No Subkriteria',
+                                                        ];
+                                                    }),
+                                                );
+                                            @endphp
                                             <a href="javascript:void(0)" class="btn btn-outline-primary show-modal"
                                                 data-nama="{{ $item->nama }}" data-jenis="{{ $item->jenis }}"
                                                 data-deskripsi="{{ $item->deskripsi }}"
                                                 data-gambar="{{ asset('storage/gambar-tanaman/' . $item->gambar) }}"
-                                                data-kriteria='@json(
-                                                    $item->subkriteria->map(function ($sub) {
-                                                        return [
-                                                            'nama_kriteria' => $sub->kriteria->nama,
-                                                            'nama_subkriteria' => $sub->nama,
-                                                        ];
-                                                    }))'>
+                                                data-kriteria="{{ $kriteriaJson }}">
                                                 Lihat Detail
                                             </a>
                                         </div>
@@ -194,6 +198,9 @@
                                 nama_subkriteria: sub.nama
                             }));
 
+                            const harga = kriteriaData.find(kriteria => kriteria.nama_kriteria ===
+                                'Harga');
+
                             const truncatedDescription = truncateText(item.deskripsi, 100);
 
                             return `
@@ -206,12 +213,13 @@
                                         <div class="col-md-12">
                                             <div class="card-body">
                                                 <h5 class="card-title">${item.nama}</h5>
+                                                <p class="card-text"><strong class="text-primary">${harga.nama_subkriteria}</strong></p>
                                                 <p class="card-text">${truncatedDescription}</p>
                                                 <a href="javascript:void(0)" class="btn btn-outline-primary show-modal"
                                                     data-nama="${item.nama}" 
                                                     data-deskripsi="${item.deskripsi}" 
                                                     data-gambar="{{ asset('storage/gambar-tanaman/') }}/${item.gambar}"
-                                                    data-kriteria='${JSON.stringify(kriteriaData)}'>
+                                                    data-kriteria='${kriteriaData}'>
                                                     Lihat Detail
                                                 </a>
                                             </div>
